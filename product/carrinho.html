@@ -22,3 +22,9 @@
 {% endif %}
 
 <a href="{% url 'listar_produtos' %}">Continuar comprando</a>
+
+{% if request.session.user_id %}
+  <a href="{% url 'finalizar_pedido' %}" class="btn btn-success">Finalizar Pedido</a>
+{% else %}
+  <p>Para finalizar a compra, faça <a href="{% url 'login' %}">login</a>.</p>
+{% endif %}

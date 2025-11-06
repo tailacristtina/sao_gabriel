@@ -1,0 +1,8 @@
+<h2>✅ Pedido confirmado!</h2>
+
+<p>Obrigado pela compra, {{ request.session.user_name }}.</p>
+<p>O número do seu pedido é <strong>#{{ pedido.id_pedido }}</strong>.</p>
+<p>Status: {{ pedido.status }}</p>
+<p>Total: R$ {{ pedido.total|floatformat:2 }}</p>
+
+<a href="{% url 'listar_produtos' %}">Voltar à loja</a>
