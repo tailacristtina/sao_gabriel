@@ -50,20 +50,23 @@
           </svg>
         </button>
       </a>
-      <button class="relative hover:text-[#A0522D] transition-colors p-2" aria-label="Carrinho">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke-width="2" 
-            stroke="currentColor" 
-            class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.75a.75.75 0 00.732-.574l1.518-6.081a.75.75 0 00-.732-.926H5.108M7.5 14.25L5.108 4.772M7.5 14.25l-.347 1.387a1.5 1.5 0 001.46 1.863h8.184a1.5 1.5 0 001.46-1.113l.29-1.137M6 19.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm11.25 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-        </svg>
-        <span class="absolute -top-2 -right-2 bg-[#A0522D] text-white text-[10px] font-semibold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
-          0
-        </span>
-      </button>
+      <a href="{% url 'ver_carrinho' %}">
+          <button class="relative hover:text-[#A0522D] transition-colors p-2" aria-label="Carrinho">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke-width="2" 
+              stroke="currentColor" 
+              class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25h9.75a.75.75 0 00.732-.574l1.518-6.081a.75.75 0 00-.732-.926H5.108M7.5 14.25L5.108 4.772M7.5 14.25l-.347 1.387a1.5 1.5 0 001.46 1.863h8.184a1.5 1.5 0 001.46-1.113l.29-1.137M6 19.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm11.25 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+          </svg>
+          <span class="absolute -top-2 -right-2 bg-[#A0522D] text-white text-[10px] font-semibold w-4 h-4 flex items-center justify-center rounded-full shadow-sm">
+            0
+          </span>
+        </button>
+      </a>
+      
     </div>
   </div>
 </header>
