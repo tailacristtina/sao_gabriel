@@ -74,11 +74,15 @@ WSGI_APPLICATION = 'sao_gabriel.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+#minhaconfig
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-   
+    'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bd_coffee',
+        'USER': 'root',
+        'PASSWORD': 'taila',
+        'HOST': 'localhost', 
+        'PORT': '3306',       
     }
 }
 
