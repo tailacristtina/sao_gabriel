@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Produtos</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    .produto { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px; display: inline-block; width: 250px; vertical-align: top; }
+    .produto h3 { margin-top: 10px; }
+    .produto .preco { color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+    <a href="{% url 'ver_carrinho' %}">🛒 Ver carrinho</a>
+
+  <h1>Lista de Produtos</h1>
+
+  {% for p in produtos %}
+  <div class="produto">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.description }}</p>
+    <p class="preco">R$ {{ p.price }}</p>
+    <a href="{% url 'adicionar_ao_carrinho' p.id_product %}">Adicionar ao carrinho</a>
+  </div>
+  {% empty %}
+  <p>Nenhum produto encontrado.</p>
+  {% endfor %}
+</body>
+</html>

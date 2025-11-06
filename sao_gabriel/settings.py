@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'sao_gabriel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-   
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bd_coffee',     # coloque o mesmo nome que está no HeidiSQL
+        'USER': 'root',              # ou outro, se o grupo usa um específico
+        'PASSWORD': '',               # senha do seu usuário no HeidiSQL
+        'HOST': '127.0.0.1',          # ou o IP do servidor remoto, se não for local
+        'PORT': '3306',
     }
 }
 

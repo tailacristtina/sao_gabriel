@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho de Compras</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    table { border-collapse: collapse; width: 70%; margin: auto; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    th { background: #eee; }
+    h1 { text-align: center; }
+    .total { font-weight: bold; font-size: 1.2em; text-align: right; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🛒 Carrinho de Compras</h1>
+
+  {% if itens %}
+  <table>
+    <tr>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th>Preço Unitário</th>
+      <th>Subtotal</th>
+    </tr>
+    {% for item in itens %}
+    <tr>
+      <td>{{ item.produto.name }}</td>
+      <td>{{ item.quantidade }}</td>
+      <td>R$ {{ item.produto.price }}</td>
+      <td>R$ {{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p class="total">Total: R$ {{ total }}</p>
+  {% else %}
+  <p style="text-align:center;">Seu carrinho está vazio.</p>
+  {% endif %}
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="{% url 'listar_produtos' %}">← Continuar comprando</a>
+  </div>
+</body>
+</html>

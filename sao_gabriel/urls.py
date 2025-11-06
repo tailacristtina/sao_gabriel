@@ -20,8 +20,9 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('users/', include('users.urls')),  # <-- isso liga o app users
+    path('users/', include('users.urls')),
 
+    # Página inicial agora será a listagem de produtos
+    path('', include('product.urls')),
 ]
 

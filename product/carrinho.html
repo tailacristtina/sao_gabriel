@@ -1,0 +1,24 @@
+<h1>Carrinho de Compras</h1>
+
+{% if itens %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Subtotal</th>
+    </tr>
+    {% for item in itens %}
+    <tr>
+        <td>{{ item.produto.nome }}</td>
+        <td>{{ item.quantidade }}</td>
+        <td>R$ {{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><strong>Total: R$ {{ total }}</strong></p>
+{% else %}
+<p>Seu carrinho está vazio.</p>
+{% endif %}
+
+<a href="{% url 'listar_produtos' %}">Continuar comprando</a>
