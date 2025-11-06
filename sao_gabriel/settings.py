@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'product',
+    'app_admin',
+
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bd_coffee',     # coloque o mesmo nome que está no HeidiSQL
         'USER': 'root',              # ou outro, se o grupo usa um específico
-        'PASSWORD': '',               # senha do seu usuário no HeidiSQL
+        'PASSWORD': 'taila',               # senha do seu usuário no HeidiSQL
         'HOST': '127.0.0.1',          # ou o IP do servidor remoto, se não for local
         'PORT': '3306',
     }

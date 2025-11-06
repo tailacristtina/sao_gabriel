@@ -3,7 +3,6 @@ from django.contrib import messages
 from .models import Users
 from .forms import RegisterForm, LoginForm
 
-
 def register_view(request):
     if request.method == 'POST':
         print("=== POST RECEBIDO ===")
@@ -25,39 +24,35 @@ def register_view(request):
 
     return render(request, 'users/register.html', {'form': form})
 
-
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-            try:
-                user = Users.objects.get(email=email)
+        try:
+            user = Users.objects.get(email=email)
 
-                if user.password == password:
-                    request.session['user_id'] = user.id_users
-                    request.session['user_name'] = user.name
-                    messages.success(request, f"Bem-vindo(a), {user.name}!")
+            if user.password == password:
+                request.session['user_id'] = user.id_users
+                request.session['user_name'] = user.name
 
-                    print(f"Usuário autenticado: {user.name}")
-                    return redirect('index')
+                messages.success(request, f"Bem-vindo(a), {user.name}!")
+                print(f"✅ Usuário autenticado: {user.name}")
+
+                if user.id_users == 1:
+                    return redirect('/app_admin/dashboard/')
                 else:
-                    messages.error(request, "Senha incorreta.")
-                    print("Senha incorreta.")
+                    return redirect('index')
 
-            except Users.DoesNotExist:
-                messages.error(request, "Email não encontrado.")
-                print("Email não encontrado.")
-        else:
-            print("Erros no login form:", form.errors)
-            messages.error(request, "Erro no formulário de login.")
-    else:
-        form = LoginForm()
+            else:
+                messages.error(request, "Senha incorreta.")
+                print("❌ Senha incorreta.")
 
-    return render(request, 'users/login.html', {'form': form})
+        except Users.DoesNotExist:
+            messages.error(request, "Email não encontrado.")
+            print("❌ Email não encontrado.")
 
+    return render(request, 'users/login.html')
 
 def logout_view(request):
     request.session.flush()
