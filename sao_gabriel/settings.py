@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'sao_gabriel.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+#minhaconfig
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

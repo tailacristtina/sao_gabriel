@@ -1,28 +1,27 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import Users
 
-class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    name = forms.CharField(max_length=255, required=True)
-    birth = forms.DateField(required=True)
-    cpf = forms.CharField(max_length=11, required=True)
-    telephone = forms.CharField(max_length=15, required=True)
+class RegisterForm(forms.ModelForm):
+    password_confirm = forms.CharField(widget=forms.PasswordInput(), label="Confirme a senha")
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = Users
+        fields = ['name', 'birth', 'cpf', 'telephone', 'email', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        if commit:
-            user.save()
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        password_confirm = cleaned_data.get('password_confirm')
 
-        user_profile = UserProfile(user=user, 
-                                   name=self.cleaned_data['name'], 
-                                   birth=self.cleaned_data['birth'], 
-                                   cpf=self.cleaned_data['cpf'], 
-                                   telephone=self.cleaned_data['telephone'])
-        user_profile.save()
-        return user
+        if password != password_confirm:
+            raise forms.ValidationError("As senhas não coincidem.")
+
+        return cleaned_data
+
+
+class LoginForm(forms.Form):
+    email = forms.CharField(label="Email")
+    password = forms.CharField(widget=forms.PasswordInput(), label="Senha")
