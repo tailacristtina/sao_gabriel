@@ -1,6 +1,6 @@
 <header class="bg-white shadow-sm sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-3">
+    <a href="{% url 'index' %}" class="flex items-center gap-3">
       <div class="w-12 h-12 bg-gradient-to-br from-[#A0522D] to-[#2E7D32] rounded-full flex items-center justify-center shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" 
              fill="none" 
@@ -12,10 +12,11 @@
                 d="M3 13a4 4 0 004 4h6a4 4 0 004-4V6H3v7zM17 9h1a2 2 0 010 4h-1V9zM6 17h8a4 4 0 004-4" />
         </svg>
       </div>
-      <div class="flex flex-col">
-        <span class="text-[#4E342E] text-lg font-medium tracking-tight">São Gabriel</span>
-        <span class="text-[9px] text-[#6D4C41] tracking-widest uppercase">Premium Coffee</span>
-      </div>
+        <div class="flex flex-col">
+          <span class="text-[#4E342E] text-lg font-medium tracking-tight">São Gabriel</span>
+          <span class="text-[9px] text-[#6D4C41] tracking-widest uppercase">Premium Coffee</span>
+        </div>
+     
     </a>
     <nav class="hidden md:flex items-center gap-8">
       <a href="#" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Home</a>

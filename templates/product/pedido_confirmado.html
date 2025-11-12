@@ -1,0 +1,20 @@
+{% include 'nav.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Pedido Finalizado com Sucesso!</h2>
+    <p>Obrigado pela sua compra, {{ order.user.name }}!</p>
+
+    <div class="card mt-4 p-4">
+        <h4>Resumo do Pedido #{{ order.id_order }}</h4>
+        <p><strong>Total:</strong> R$ {{ order.total }}</p>
+        <p><strong>Frete:</strong> R$ {{ order.shipping_value }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Data:</strong> {{ order.created_at|date:"d/m/Y H:i" }}</p>
+    </div>
+
+    <a href="{% url 'index' %}" class="btn btn-primary mt-4">Voltar à Loja</a>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

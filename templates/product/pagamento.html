@@ -1,0 +1,20 @@
+{% include 'nav.html' %}
+{% block content %}
+
+<h2 class="text-center text-xl font-semibold mb-4">Finalizar Pagamento</h2>
+<p class="text-center">Total: <strong>R$ {{ order.total }}</strong></p>
+
+<!-- SDK Mercado Pago -->
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<div id="wallet_container" class="mt-6 flex justify-center"></div>
+
+<script>
+    const mp = new MercadoPago("SUA_PUBLIC_KEY_AQUI", { locale: "pt-BR" });
+    mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: "{{ preference_id }}",
+        },
+    });
+</script>
+
+{% endblock %}

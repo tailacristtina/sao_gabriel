@@ -3,62 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <title>Carrinho de Compras</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    table { border-collapse: collapse; width: 70%; margin: auto; }
-    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-    th { background: #eee; }
-    h1 { text-align: center; }
-    .total { font-weight: bold; font-size: 1.2em; text-align: right; margin-top: 20px; }
-  </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
- <h2>🛒 Carrinho de Compras</h2>
+   {% include 'nav.html' %}
+ {% load static %}
 
-{% if itens %}
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Produto</th>
-      <th>Quantidade</th>
-      <th>Subtotal</th>
-    </tr>
-    {% for item in itens %}
-      <tr>
-        <td>{{ item.produto.name }}</td>
-        <td>{{ item.quantidade }}</td>
-        <td>R$ {{ item.subtotal|floatformat:2 }}</td>
-      </tr>
-    {% endfor %}
-  </table>
+<div class="min-h-screen bg-[#f9f5f0] py-10 px-4">
+  <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+    
+    <h2 class="text-3xl font-semibold text-center text-[#4b2e1e] mb-8">
+      🛒 Carrinho de Compras
+    </h2>
 
-  {% if frete %}
-    <p>🚚 Frete: R$ {{ frete|floatformat:2 }}</p>
-    <p><small>CEP usado: {{ cep }}</small></p>
-  {% else %}
-    <form method="post">
-      {% csrf_token %}
-      <label>Calcular frete (CEP):</label>
-      <input type="text" name="cep" maxlength="9" required>
-      <button type="submit">Calcular</button>
-    </form>
-  {% endif %}
+    {% if itens %}
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-[#e8dfd3] rounded-xl overflow-hidden">
+          <thead class="bg-[#4b2e1e] text-white uppercase text-sm tracking-wide">
+            <tr>
+              <th class="py-3 px-4 text-left">Produto</th>
+              <th class="py-3 px-4 text-left">Quantidade</th>
+              <th class="py-3 px-4 text-left">Subtotal</th>
+              <th class="py-3 px-4 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in itens %}
+              <tr class="border-b border-[#eee] hover:bg-[#f8f3ed] transition">
+                <td class="py-3 px-4 font-medium text-[#3c2a1e]">
+                  {{ item.produto.name }}
+                </td>
+                <td class="py-3 px-4 text-[#5b4634] flex items-center gap-2">
+                  <a href="{% url 'diminuir_quantidade' item.produto.id_product %}"
+                     class="bg-[#b89a7e] text-white px-2 py-1 rounded hover:bg-[#a38369]">−</a>
+                  <span class="font-semibold">{{ item.quantidade }}</span>
+                  <a href="{% url 'aumentar_quantidade' item.produto.id_product %}"
+                     class="bg-[#6f4e37] text-white px-2 py-1 rounded hover:bg-[#8b5e3c]">+</a>
+                </td>
+                <td class="py-3 px-4 font-semibold text-[#6f4e37]">
+                  R$ {{ item.subtotal|floatformat:2 }}
+                </td>
+                <td class="py-3 px-4 text-center">
+                  <a href="{% url 'remover_produto' item.produto.id_product %}"
+                     class="text-red-600 font-medium hover:underline">Remover</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
 
-  <p><strong>Total: R$ {{ total|floatformat:2 }}</strong></p>
+      <div class="mt-6">
+        <form method="post" class="flex flex-col sm:flex-row gap-3 items-center mt-4">
+          {% csrf_token %}
+          <label class="text-[#4b2e1e] font-medium">Recalcular frete (CEP):</label>
+          <input type="text" name="cep" maxlength="9" value="{{ cep }}" required
+                 class="border border-[#b89a7e] rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#6f4e37] outline-none" />
+          <button type="submit"
+                  class="bg-[#6f4e37] hover:bg-[#8b5e3c] text-white px-5 py-2 rounded-lg transition">
+            Calcular
+          </button>
+        </form>
 
-  <br>
-  <a href="{% url 'listar_produtos' %}">Continuar comprando</a>
+        {% if frete %}
+          <p class="mt-2 text-[#6f4e37] text-lg">
+            🚚 Frete: <span class="font-semibold">R$ {{ frete|floatformat:2 }}</span>
+          </p>
+          <p class="text-sm text-[#857565]">CEP usado: {{ cep }}</p>
+        {% endif %}
+      </div>
 
-  {% if request.session.user_id %}
-    <br><br>
-    <a href="{% url 'finalizar_pedido' %}" class="btn btn-success">Finalizar Pedido</a>
-  {% else %}
-    <p>Para finalizar a compra, faça <a href="{% url 'login' %}">login</a>.</p>
-  {% endif %}
+      <div class="mt-6 text-right">
+        <p class="text-xl font-semibold text-[#3c2a1e]">
+          Total: <span class="text-[#6f4e37]">R$ {{ total|floatformat:2 }}</span>
+        </p>
+      </div>
 
-{% else %}
-  <p>Seu carrinho está vazio.</p>
-  <a href="{% url 'listar_produtos' %}">Voltar à loja</a>
-{% endif %}
+      <div class="mt-8 flex flex-col sm:flex-row justify-between gap-4">
+        <a href="{% url 'listar_produtos' %}"
+           class="bg-[#4b2e1e] hover:bg-[#6f4e37] text-white px-6 py-3 rounded-lg text-center font-medium transition">
+          ← Continuar comprando
+        </a>
+          
+        {% if request.session.user_id %}
+          <a href="{% url 'finalizar_pedido' %}"
+             class="bg-[#6f4e37] hover:bg-[#8b5e3c] text-white px-6 py-3 rounded-lg text-center font-medium transition">
+            Finalizar Pedido →
+          </a>
+        {% else %}
+          <a href="{% url 'login' %}"
+             class="bg-[#4b2e1e] hover:bg-[#6f4e37] text-white px-6 py-3 rounded-lg text-center font-medium transition">
+            Fazer Login
+          </a>
+        {% endif %}
+      </div>
 
+    {% else %}
+      <div class="text-center py-20">
+        <p class="text-[#6b4a35] text-lg mb-4">Seu carrinho está vazio ☕</p>
+        <a href="{% url 'listar_produtos' %}"
+           class="inline-block bg-[#6f4e37] hover:bg-[#8b5e3c] text-white px-6 py-3 rounded-lg font-medium transition">
+          Voltar à loja
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+  {% include 'footer.html' %}
 </body>
 </html>
