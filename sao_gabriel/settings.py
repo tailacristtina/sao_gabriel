@@ -40,8 +40,22 @@ INSTALLED_APPS = [
     'users',
     'product',
     'app_admin',
+<<<<<<< HEAD
+=======
+    'django.contrib.sites',
+    'social_django',
+>>>>>>> f59700a (#feat# + perfil funcionando)
 
 ]
+#api logingoogle
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2', 
+    'django.contrib.auth.backends.ModelBackend',  
+)
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/index'  
+LOGOUT_REDIRECT_URL = '/login'  
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,7 +95,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bd_coffee',     # coloque o mesmo nome que está no HeidiSQL
+<<<<<<< HEAD
         'USER': 'root',              # ou outro, se o grupo usa um específico
+=======
+        'USER': 'taila',              # ou outro, se o grupo usa um específico
+>>>>>>> f59700a (#feat# + perfil funcionando)
         'PASSWORD': 'taila',               # senha do seu usuário no HeidiSQL
         'HOST': '127.0.0.1',          # ou o IP do servidor remoto, se não for local
         'PORT': '3306',
@@ -106,6 +124,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

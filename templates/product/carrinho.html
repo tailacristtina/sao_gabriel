@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Carrinho de Compras - Premium Coffee</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/712/712236.png" type="image/png">
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
   <style>
     body { font-family: Arial, sans-serif; margin: 30px; }
     table { border-collapse: collapse; width: 70%; margin: auto; }
@@ -15,7 +15,8 @@
   </style>
 </head>
 <body>
- <h2>🛒 Carrinho de Compras</h2>
+    {% include 'nav.html' %}
+  <h1>🛒 Carrinho de Compras</h1>
 
 {% if itens %}
   <table border="1" cellpadding="8">
@@ -45,6 +46,7 @@
     </form>
   {% endif %}
 
+<<<<<<< HEAD
   <p><strong>Total: R$ {{ total|floatformat:2 }}</strong></p>
 
   <br>
@@ -62,5 +64,11 @@
   <a href="{% url 'listar_produtos' %}">Voltar à loja</a>
 {% endif %}
 
+=======
+  <div style="text-align:center; margin-top:20px;">
+    <a href="{% url 'listar_produtos' %}">← Continuar comprando</a>
+  </div>
+    {% include 'footer.html' %}
+>>>>>>> f59700a (#feat# + perfil funcionando)
 </body>
 </html>

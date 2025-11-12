@@ -17,7 +17,6 @@ def admin_dashboard(request):
         'titulo_gerenciamento': 'Painel do Administrador',
     })
 
-# --- Lista de Produtos ---
 def product_list(request):
     user_id = request.session.get('user_id')
 
@@ -37,7 +36,6 @@ def product_list(request):
     return render(request, 'administrator/product_list.html', context)
 
 
-# --- Cadastro de Produto ---
 def product_create(request):
     user_id = request.session.get('user_id')
 
@@ -70,7 +68,6 @@ def product_create(request):
     })
 
 
-# --- Editar Produto ---
 def product_edit(request, product_id):
     user_id = request.session.get('user_id')
 
@@ -105,7 +102,6 @@ def product_edit(request, product_id):
     })
 
 
-# --- Deletar Produto ---
 def product_delete(request, product_id):
     user_id = request.session.get('user_id')
 
