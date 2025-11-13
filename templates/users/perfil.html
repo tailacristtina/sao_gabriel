@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil - São Gabriel Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
+  <style>
+    body { font-family: 'Open Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-[#4E342E]">
+
+  {% include 'nav.html' %}
+
+  <section class="max-w-4xl mx-auto mt-16 p-6 bg-white border rounded-xl shadow-md">
+    <h2 class="text-3xl font-bold text-[#4E342E] mb-6 text-center">Meu Perfil</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex flex-col">
+        <label class="mb-2 font-semibold">Nome</label>
+        <input type="text" value="{{ user.name }}" readonly
+               class="border border-gray-300 rounded-lg p-3 bg-[#FAFAFA] text-[#4E342E]" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="mb-2 font-semibold">Email</label>
+        <input type="email" value="{{ user.email }}" readonly
+               class="border border-gray-300 rounded-lg p-3 bg-[#FAFAFA] text-[#4E342E]" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="mb-2 font-semibold">Senha</label>
+        <input type="password" value="{{ user.password }}" readonly
+               class="border border-gray-300 rounded-lg p-3 bg-[#FAFAFA] text-[#4E342E]" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="mb-2 font-semibold">Data de Nascimento</label>
+        <input type="text" value="{{ user.birth }}" readonly
+               class="border border-gray-300 rounded-lg p-3 bg-[#FAFAFA] text-[#4E342E]" />
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="{% url 'index' %}" 
+         class="inline-block bg-[#A0522D] hover:bg-[#8B4513] text-white px-8 py-3 rounded-lg shadow-md transition">
+        Voltar ao Início
+      </a>
+        <a href="{% url 'logout' %}" 
+         class="inline-block bg-[#A0522D] hover:bg-[#8B4513] text-white px-8 py-3 rounded-lg shadow-md transition">
+        Sair
+      </a>
+    </div>
+  </section>
+
+  {% include 'footer.html' %}
+
+</body>
+</html>

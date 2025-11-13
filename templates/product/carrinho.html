@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Carrinho de Compras</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    table { border-collapse: collapse; width: 70%; margin: auto; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    th { background: #eee; }
+    h1 { text-align: center; }
+    .total { font-weight: bold; font-size: 1.2em; text-align: right; margin-top: 20px; }
+  </style>
 </head>
 <body>
-   {% include 'nav.html' %}
- {% load static %}
-
-<div class="min-h-screen bg-[#f9f5f0] py-10 px-4">
-  <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8">
-    
-    <h2 class="text-3xl font-semibold text-center text-[#4b2e1e] mb-8">
-      🛒 Carrinho de Compras
-    </h2>
+ <h2>🛒 Carrinho de Compras</h2>
 
     {% if itens %}
       <div class="overflow-x-auto">
@@ -65,38 +64,29 @@
           </button>
         </form>
 
-        {% if frete %}
-          <p class="mt-2 text-[#6f4e37] text-lg">
-            🚚 Frete: <span class="font-semibold">R$ {{ frete|floatformat:2 }}</span>
-          </p>
-          <p class="text-sm text-[#857565]">CEP usado: {{ cep }}</p>
-        {% endif %}
-      </div>
+  {% if frete %}
+    <p>🚚 Frete: R$ {{ frete|floatformat:2 }}</p>
+    <p><small>CEP usado: {{ cep }}</small></p>
+  {% else %}
+    <form method="post">
+      {% csrf_token %}
+      <label>Calcular frete (CEP):</label>
+      <input type="text" name="cep" maxlength="9" required>
+      <button type="submit">Calcular</button>
+    </form>
+  {% endif %}
 
-      <div class="mt-6 text-right">
-        <p class="text-xl font-semibold text-[#3c2a1e]">
-          Total: <span class="text-[#6f4e37]">R$ {{ total|floatformat:2 }}</span>
-        </p>
-      </div>
+  <p><strong>Total: R$ {{ total|floatformat:2 }}</strong></p>
 
-      <div class="mt-8 flex flex-col sm:flex-row justify-between gap-4">
-        <a href="{% url 'listar_produtos' %}"
-           class="bg-[#4b2e1e] hover:bg-[#6f4e37] text-white px-6 py-3 rounded-lg text-center font-medium transition">
-          ← Continuar comprando
-        </a>
-          
-        {% if request.session.user_id %}
-          <a href="{% url 'finalizar_pedido' %}"
-             class="bg-[#6f4e37] hover:bg-[#8b5e3c] text-white px-6 py-3 rounded-lg text-center font-medium transition">
-            Finalizar Pedido →
-          </a>
-        {% else %}
-          <a href="{% url 'login' %}"
-             class="bg-[#4b2e1e] hover:bg-[#6f4e37] text-white px-6 py-3 rounded-lg text-center font-medium transition">
-            Fazer Login
-          </a>
-        {% endif %}
-      </div>
+  <br>
+  <a href="{% url 'listar_produtos' %}">Continuar comprando</a>
+
+  {% if request.session.user_id %}
+    <br><br>
+    <a href="{% url 'finalizar_pedido' %}" class="btn btn-success">Finalizar Pedido</a>
+  {% else %}
+    <p>Para finalizar a compra, faça <a href="{% url 'login' %}">login</a>.</p>
+  {% endif %}
 
     {% else %}
       <div class="text-center py-20">
@@ -110,6 +100,5 @@
   </div>
 </div>
 
-  {% include 'footer.html' %}
 </body>
 </html>

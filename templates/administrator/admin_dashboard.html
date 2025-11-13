@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin - Premium Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
+
+  <!-- Bootstrap CSS (Consistente com seus outros arquivos) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f4f6f9;
+    }
+    .card-admin {
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .card-admin:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    footer {
+        background-color: #343a40;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <div class="w-12 h-12 bg-gradient-to-br from-[#A0522D] to-[#2E7D32] rounded-full flex items-center justify-center shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             fill="none" 
+             viewBox="0 0 24 24" 
+             stroke-width="2" 
+             stroke="white" 
+             class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" 
+                d="M3 13a4 4 0 004 4h6a4 4 0 004-4V6H3v7zM17 9h1a2 2 0 010 4h-1V9zM6 17h8a4 4 0 004-4" />
+        </svg>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-[#4E342E] text-lg font-medium tracking-tight">São Gabriel</span>
+        <span class="text-[9px] text-[#6D4C41] tracking-widest uppercase">Premium Coffee</span>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+    <a href="{% url 'dashboard' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Dashboard</a>
+    <a href="{% url 'product_create' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Formulário Produto</a>
+    <a href="{% url 'product_list' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Listar Produto</a>
+  </nav>
+
+  </div>
+</header>
+
+
+  <!-- Dashboard Principal -->
+  <div class="container mt-5">
+    <h1 class="mb-4">{{ titulo }}</h1>
+
+    <!-- Cartões de Resumo - Usando dados enviados pela view.py -->
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3 shadow">
+          <div class="card-body">
+            <h5 class="card-title">Produtos Cadastrados</h5>
+            <p class="card-text fs-2">{{ contagem_produtos }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-success mb-3 shadow">
+          <div class="card-body">
+            <h5 class="card-title">Usuários Registrados</h5>
+            <p class="card-text fs-2">{{ contagem_usuarios }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3 shadow">
+          <div class="card-body">
+            <h5 class="card-title">Atenção (Estoque Baixo)</h5>
+            <p class="card-text fs-2">{{ contagem_pedidos }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seções de Gerenciamento (CRUD) -->
+    <h2 class="mb-3">Gerenciamento Rápido (CRUD)</h2>
+    <div class="row">
+      
+      <!-- Produtos (Product) -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-admin h-100 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title">Produtos</h4>
+            <p class="card-text">Gerencie o estoque e os detalhes dos produtos.</p>
+            <!-- Link para a view product_list -->
+            <a href="{% url 'product_list' %}" class="btn btn-primary w-100 mb-2">Ver/Editar Produtos</a>
+            <!-- Link para a view product_create -->
+            <a href="{% url 'product_create' %}" class="btn btn-outline-success w-100">Cadastrar Novo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categorias (Category) -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-admin h-100 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title">Categorias</h4>
+            <p class="card-text">Adicione, edite ou remova categorias do seu catálogo.</p>
+            <a href="#" class="btn btn-primary w-100 mb-2 disabled">Em Breve</a>
+            <a href="#" class="btn btn-outline-success w-100 disabled">Cadastrar Nova</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usuários (Users) -->
+      <div class="col-md-4 mb-4">
+        <div class="card card-admin h-100 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title">Usuários</h4>
+            <p class="card-text">Gerencie contas, permissões e histórico de clientes.</p>
+            <!-- Link para o admin padrão do Django -->
+            <a href="{% url 'admin:index' %}" class="btn btn-primary w-100 mb-2">Admin Padrão</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+   {% include 'footer.html' %}
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

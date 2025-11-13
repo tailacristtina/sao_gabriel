@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ titulo_gerenciamento }} - Premium Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
+</head>
+<body class="bg-[#FAFAFA] text-gray-800">
+
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-br from-[#A0522D] to-[#2E7D32] rounded-full flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13a4 4 0 004 4h6a4 4 0 004-4V6H3v7zM17 9h1a2 2 0 010 4h-1V9zM6 17h8a4 4 0 004-4" />
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[#4E342E] text-lg font-medium tracking-tight">São Gabriel</span>
+          <span class="text-[9px] text-[#6D4C41] tracking-widest uppercase">Premium Coffee</span>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="{% url 'dashboard' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Dashboard</a>
+        <a href="{% url 'product_create' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Formulário Produto</a>
+        <a href="{% url 'product_list' %}" class="hover:text-[#A0522D] uppercase text-sm font-semibold">Listar Produto</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="max-w-2xl mx-auto mt-16 bg-white p-10 rounded-xl shadow-lg">
+    <h3 class="text-2xl font-semibold text-center mb-6">{{ titulo_gerenciamento }}</h3>
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
+      
+      <div>
+        <label for="id_name" class="block text-sm font-medium mb-1">Nome do Produto</label>
+        <input type="text" id="id_name" name="name" placeholder="Ex: Café Gourmet Arábica" required 
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0522D]" />
+      </div>
+
+      <div>
+        <label for="id_category" class="block text-sm font-medium mb-1">Categoria</label>
+        <select id="id_category" name="category" required 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0522D]">
+          <option value="">Selecione uma categoria...</option>
+          <option value="1">Cafés Especiais</option>
+          <option value="2">Acessórios</option>
+          <option value="3">Máquinas</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_price" class="block text-sm font-medium mb-1">Preço (R$)</label>
+        <input type="number" step="0.01" id="id_price" name="price" placeholder="Ex: 29.90" required 
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0522D]" />
+      </div>
+
+      <div>
+        <label for="id_description" class="block text-sm font-medium mb-1">Descrição</label>
+        <textarea id="id_description" name="description" rows="4" placeholder="Detalhes completos sobre o produto..." required
+                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0522D]"></textarea>
+      </div>
+
+      <div>
+        <label for="id_image" class="block text-sm font-medium mb-1">Imagens</label>
+        <input type="file" id="id_image" name="images" multiple 
+               class="w-full text-sm text-gray-600 file:bg-[#A0522D] file:text-white file:px-4 file:py-2 file:rounded-lg file:border-none hover:file:bg-[#8B4513]" />
+      </div>
+
+      <button type="submit" class="w-full bg-[#A0522D] hover:bg-[#8B4513] text-white py-3 rounded-lg font-semibold transition">Salvar Produto</button>
+    </form>
+
+    <div class="mt-6 text-center">
+      <a href="{% url 'product_list' %}" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2 rounded-lg transition">Cancelar e Voltar</a>
+    </div>
+  </section>
+
+    {% include 'footer.html' %}
+
+
+</body>
+</html>

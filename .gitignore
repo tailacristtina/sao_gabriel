@@ -1,0 +1,17 @@
+# Ambiente Virtual
+.venv/
+venv/
+*.bak
+
+# Arquivos de Cache e Compilados do Python
+__pycache__/
+*.pyc
+
+# Migrações (Normalmente não se faz commit, mas se forem essenciais, ignore esta seção)
+# Recomenda-se fazer commit dos arquivos de migração.
+
+# Dados do Django/Banco de Dados
+*.sqlite3
+
+# Arquivos de IDE (VS Code, etc.)
+.vscode/
