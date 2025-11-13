@@ -1,3 +1,8 @@
+# sao_gabriel/settings.py (NO TOPO DO ARQUIVO)
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
 """
 Django settings for sao_gabriel project.
 
@@ -10,6 +15,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+# O resto do seu arquivo settings.py começa aqui...
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,16 +43,37 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'product',
-    'app_admin',
-<<<<<<< HEAD
-=======
     'django.contrib.sites',
     'social_django',
->>>>>>> f59700a (#feat# + perfil funcionando)
-
+     
+    'users',
+    'product',
+    'pagamento',
+    'app_admin',
+    'store',
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'pagamento': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # Define o nível para exibir todos os logs (incluindo ERROR)
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO', # Manter logs padrão do Django
+            'propagate': True,
+        },
+    },
+}
 #api logingoogle
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2', 
@@ -91,20 +118,22 @@ WSGI_APPLICATION = 'sao_gabriel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 #minhaconfig
+# sao_gabriel/settings.py
+# sao_gabriel/settings.py (Na seção DATABASES)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bd_coffee',     # coloque o mesmo nome que está no HeidiSQL
-<<<<<<< HEAD
-        'USER': 'root',              # ou outro, se o grupo usa um específico
-=======
-        'USER': 'taila',              # ou outro, se o grupo usa um específico
->>>>>>> f59700a (#feat# + perfil funcionando)
-        'PASSWORD': 'taila',               # senha do seu usuário no HeidiSQL
-        'HOST': '127.0.0.1',          # ou o IP do servidor remoto, se não for local
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'bd_coffee', 
+        'USER': 'root', 
+        'PASSWORD': '', 
+        'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            
+        }
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -125,11 +154,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-    "django.contrib.auth.hashers.ScryptPasswordHasher",
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
 
 # Internationalization
@@ -153,3 +180,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# sao_gabriel/settings.py (Adicione no final do arquivo)
+
+
+# -----------------------------------------------------
+
+
+
+
+# URL para redirecionar após o login bem-sucedido (sem parâmetros 'next')
+LOGIN_REDIRECT_URL = '/index' # Redireciona para a página inicial (listar_produtos)
+# ...
+
+# URL onde o Django deve buscar a página de login.
+# Já está implícito na sua view, mas é bom ter no settings também.
+LOGIN_URL = '/contas/login/' # Ou 'contas/login/' se você seguiu o passo 1
+
+# --- Configurações do Mercado Pago (Sandbox/Teste) ---
+MP_ACCESS_TOKEN = 'APP_USR-2201546978636815-111017-c7629d7e22017f3b3ad4ca670d35e378-2979950899'
