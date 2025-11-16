@@ -98,9 +98,9 @@ DATABASES = {
 <<<<<<< HEAD
         'USER': 'root',              # ou outro, se o grupo usa um específico
 =======
-        'USER': 'taila',              # ou outro, se o grupo usa um específico
+        'USER': 'root',              # ou outro, se o grupo usa um específico
 >>>>>>> f59700a (#feat# + perfil funcionando)
-        'PASSWORD': 'taila',               # senha do seu usuário no HeidiSQL
+        'PASSWORD': '',               # senha do seu usuário no HeidiSQL
         'HOST': '127.0.0.1',          # ou o IP do servidor remoto, se não for local
         'PORT': '3306',
     }
