@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>São Gabriel - Premium Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#4E342E]">
+
+   {% include 'nav.html' %}
+
+  <section class="relative bg-black text-white h-[80vh] flex flex-col items-center justify-center text-center">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1600" 
+         alt="Café em grãos" 
+         class="absolute inset-0 w-full h-full object-cover opacity-60" />
+    <div class="relative z-10 px-6">
+      <p class="uppercase tracking-[4px] mb-2">Que tal ter uma</p>
+      <h2 class="text-2xl font-light mb-1">Experiência <span class="font-semibold">São Gabriel</span></h2>
+      <p class="uppercase mb-4 tracking-[3px]">todo mês?</p>
+      <h1 class="text-3xl font-bold uppercase">Clube de <span class="italic text-[#E57352]">assinatura</span></h1>
+      <a href="#" class="inline-block mt-8 bg-[#3E2723] hover:bg-[#5D4037] px-8 py-3 rounded-lg text-white uppercase tracking-wide shadow-lg">
+        Assine o clube e tenha vantagens exclusivas!
+      </a>
+    </div>
+  </section>
+  
+  <svg class="icon-selection icon-selection--#212121" aria-hidden="true" 
+    focusable="false" 
+    role="presentation" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none">
+    <path d="M12,21.932,2.2,11.84A5.667,5.667,0,0,1,1.113,5.233h0A5.839,5.839,0,0,1,10.4,3.746L12,5.205l1.6-1.459a5.84,5.84,0,0,1,9.287,1.487h0A5.669,5.669,0,0,1,21.8,11.84Z" 
+    fill="none" 
+    stroke="#000000" 
+    stroke-linecap="round" 
+    stroke-linejoin="round">
+    </path>
+  </svg>
+  <section class="flex flex-wrap justify-center gap-6 mt-10 max-w-6xl mx-auto px-4">
+    <div class="bg-white border rounded-xl shadow-sm p-6 text-center w-80">
+      
+      <p class="mt-3 font-medium">Seu café especial todos os meses na sua porta</p>
+    </div>
+    <div class="bg-white border rounded-xl shadow-sm p-6 text-center w-80">
+      
+      <p class="mt-3 font-medium">Descontos exclusivos de 15% OFF</p>
+    </div>
+    <div class="bg-white border rounded-xl shadow-sm p-6 text-center w-80">
+      
+      <p class="mt-3 font-medium">Frete grátis acima de R$99,00 para as regiões Sudeste</p>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto py-16 px-6 text-center">
+    <h2 class="text-2xl font-semibold mb-8">Por que escolher nossa assinatura?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2"> Cafés Especiais</h3>
+        <p class="text-sm">Grãos selecionados com pontuação acima de 85 pontos.</p>
+      </div>
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2">Qualidade Premium</h3>
+        <p class="text-sm">Cafés de origem única e torrefação artesanal.</p>
+      </div>
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2"> Sustentabilidade</h3>
+        <p class="text-sm">Parceria com produtores que praticam agricultura sustentável.</p>
+      </div>
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2"> Entrega Mensal</h3>
+        <p class="text-sm">Receba seu café todo mês com entrega garantida.</p>
+      </div>
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2"> Feito com Amor</h3>
+        <p class="text-sm">Torrado e embalado com cuidado artesanal.</p>
+      </div>
+      <div class="border rounded-lg p-6 shadow-sm">
+        <h3 class="font-semibold mb-2"> Comunidade</h3>
+        <p class="text-sm">Faça parte de uma comunidade apaixonada por café.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-b from-[#FAFAFA] to-white py-16">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-2xl font-semibold mb-10">Escolha seu plano de assinatura</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="border rounded-2xl shadow-md p-8 bg-white">
+          <h3 class="text-lg font-semibold mb-2">Plano Básico</h3>
+          <p class="text-sm text-gray-600 mb-4">R$ 79,90/mês</p>
+          <ul class="text-sm space-y-2 text-left mb-6">
+            <li>✅ 250g de café especial por mês</li>
+            <li>✅ Desconto de 10% na loja</li>
+            <li>✅ Envio mensal com rastreio</li>
+          </ul>
+          <a href="#" class="block w-full bg-[#A0522D] hover:bg-[#8B4513] text-white py-2 rounded-lg transition">Assinar Agora</a>
+        </div>
+
+        <div class="border-2 border-[#A0522D] rounded-2xl shadow-lg p-8 bg-white scale-105">
+          <div class="text-xs text-[#A0522D] font-bold uppercase mb-2">Mais Popular</div>
+          <h3 class="text-lg font-semibold mb-2">Plano Premium</h3>
+          <p class="text-sm text-gray-600 mb-4">R$ 129,90/mês</p>
+          <ul class="text-sm space-y-2 text-left mb-6">
+            <li>✅ 500g de café especial por mês</li>
+            <li>✅ 2 origens diferentes</li>
+            <li>✅ Desconto de 15% na loja</li>
+            <li>✅ Frete grátis no Sudeste</li>
+          </ul>
+          <a href="#" class="block w-full bg-[#A0522D] hover:bg-[#8B4513] text-white py-2 rounded-lg transition">Assinar Agora</a>
+        </div>
+
+        <div class="border rounded-2xl shadow-md p-8 bg-white">
+          <h3 class="text-lg font-semibold mb-2">Plano Master</h3>
+          <p class="text-sm text-gray-600 mb-4">R$ 199,90/mês</p>
+          <ul class="text-sm space-y-2 text-left mb-6">
+            <li>✅ 1kg de café premium por mês</li>
+            <li>✅ 2 origens diferentes</li>
+            <li>✅ Desconto de 20% na loja</li>
+            <li>✅ Acesso ao grupo VIP</li>
+          </ul>
+          <a href="#" class="block w-full bg-[#A0522D] hover:bg-[#8B4513] text-white py-2 rounded-lg transition">Assinar Agora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   {% include 'footer.html' %}
+
+</body>
+</html>

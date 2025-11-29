@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Pedido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
+        .approved { border-color: #10B981; }
+        .pending { border-color: #FBBF24; }
+        .failure { border-color: #EF4444; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="max-w-lg w-full p-8 bg-white shadow-xl rounded-2xl text-center border-t-8 
+        {% if status == 'approved' %}approved border-emerald-500
+        {% elif status == 'pending' %}pending border-amber-500
+        {% else %}failure border-red-500
+        {% endif %}">
+        
+        <!-- Ícone Condicional -->
+        {% if status == 'approved' %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-emerald-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+        {% elif status == 'pending' %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-amber-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+        {% endif %}
+        
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Status do Pedido</h1>
+        
+        <p class="text-gray-600 mb-4">{{ mensagem }}</p>
+        
+        <div class="bg-gray-100 p-4 rounded-lg mb-6">
+            <p class="font-semibold text-gray-700">Referência do Pagamento (Sessão ID):</p>
+            <p class="text-sm text-gray-500">{{ external_reference }}</p>
+            <p class="font-semibold text-gray-700 mt-2">Status:</p>
+            <p class="text-sm font-bold 
+                {% if status == 'approved' %}text-emerald-600
+                {% elif status == 'pending' %}text-amber-600
+                {% else %}text-red-600
+                {% endif %}">
+                {{ status|upper }}
+            </p>
+        </div>
+        
+                <a href="{% url 'product:listar_produtos' %}" class="inline-block bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded-lg transition duration-150 shadow-md">
+            Continuar Comprando
+        </a>
+    </div>
+</body>
+</html>

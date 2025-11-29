@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho de Compras | São Gabriel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Cores personalizadas para consistência */
+    .bg-coffee-dark { background-color: #4B2E1E; }
+    .bg-cream { background-color: #F8F3ED; }
+    .text-coffee-light { color: #6F4E37; }
+    .border-coffee-light { border-color: #A38369; }
+    .hover-bg-coffee-light:hover { background-color: #A38369; }
+    .btn-checkout { background-color: #6F4E37; }
+    .btn-checkout:hover { background-color: #4B2E1E; }
+  </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Pedido Finalizado com Sucesso!</h2>
+        <p>Obrigado pela sua compra, {{ order.user_info.name }}!</p> 
+
+    <div class="card mt-4 p-4">
+        <h4>Resumo do Pedido #{{ order.id_order }}</h4>
+        <p><strong>Total:</strong> R$ {{ order.total }}</p>
+        <p><strong>Frete:</strong> R$ {{ order.shipping_value }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Data:</strong> {{ order.created_at|date:"d/m/Y H:i" }}</p>
+    </div>
+
+        <a href="{% url 'product:listar_produtos' %}" class="btn btn-primary mt-4">Voltar à Loja</a>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}
+</body>

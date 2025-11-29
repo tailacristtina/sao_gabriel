@@ -64,7 +64,7 @@
         <p class="text-[#6D4C41]">Comece sua jornada com cafés especiais</p>
       </div>
 
-      <form method="POST" action="{% url 'register' %}" class="space-y-6">
+      <form method="POST" action="{% url 'users:register' %}" class="space-y-6">
         {% csrf_token %}
         <div class="space-y-4">
           <div class="space-y-2">
@@ -193,7 +193,7 @@
 
       <p class="text-center text-sm text-[#6D4C41]">
         Já tem uma conta?
-        <a href="{% url 'login' %}" class="font-medium text-[#A0522D] hover:text-[#8B4513] transition-colors ml-1">
+        <a href="{% url 'users:login' %}" class="font-medium text-[#A0522D] hover:text-[#8B4513] transition-colors ml-1">
           Entrar
         </a>
       </p>

@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Produtos - Premium Coffee</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    .produto { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px; display: inline-block; width: 250px; vertical-align: top; }
-    .produto h3 { margin-top: 10px; }
-    .produto .preco { color: green; font-weight: bold; }
-  </style>
+  <meta charset="UTF-8">
+  <title>Produtos - Premium Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/coffee-224/504/coffee-seeds-plant-garden-nature-512.png" type="image/png">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    .produto { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px; display: inline-block; width: 250px; vertical-align: top; }
+    .produto h3 { margin-top: 10px; }
+    .produto .preco { color: green; font-weight: bold; }
+  </style>
 </head>
 <body>
-     {% include 'nav.html' %}
+     {% include 'nav.html' %}
 
-    <a href=" {% url 'carrinho_view' %} "></a>🛒 Ver carrinho</a>
+        <a href="{% url 'store:carrinho' %}">🛒 Ver carrinho</a>
 
-  <h1>Lista de Produtos</h1>
+  <h1>Lista de Produtos</h1>
 
-  {% for p in produtos %}
-  <div class="produto">
-    <h3>{{ p.name }}</h3>
-    <p>{{ p.description }}</p>
-    <p class="preco">R$ {{ p.price }}</p>
-    <a href="{% url 'adicionar_ao_carrinho' p.id_product %}">Adicionar ao carrinho</a>
-  </div>
-  {% empty %}
-  <p>Nenhum produto encontrado.</p>
-  {% endfor %}
+  {% for p in produtos %}
+  <div class="produto">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.description }}</p>
+    <p class="preco">R$ {{ p.price }}</p>
+        <a href="{% url 'store:adicionar_ao_carrinho' p.id_product %}">Adicionar ao carrinho</a>
+  </div>
+  {% empty %}
+  <p>Nenhum produto encontrado.</p>
+  {% endfor %}
 
-  {% include 'footer.html' %}
+  {% include 'footer.html' %}
 
 </body>
 </html>

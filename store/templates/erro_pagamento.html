@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro no Pagamento</title>
+    <!-- Inclua o link do seu Tailwind CSS aqui, se estiver usando um template base, estenda-o -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para a fonte Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full p-8 bg-white shadow-xl rounded-2xl text-center">
+        <!-- Ícone de Erro  -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Ops! Algo deu errado.</h1>
+        <p class="text-gray-600 mb-6">
+            Não foi possível iniciar o processo de pagamento. Por favor, tente novamente mais tarde.
+            <br>
+            Detalhe: **{{ message }}**
+        </p>
+        <a href="{% url 'store:finalizar_pedido' %}" class="inline-block bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 shadow-md">
+            Voltar ao Checkout
+        </a>
+    </div>
+</body>
+</html>

@@ -2,17 +2,24 @@
 {% block content %}
 
 <h2 class="text-center text-xl font-semibold mb-4">Finalizar Pagamento</h2>
-<p class="text-center">Total: <strong>R$ {{ order.total }}</strong></p>
+<p class="text-center">Total: <strong>R$ {{ total_compra|floatformat:2 }}</strong></p>
 
-<!-- SDK Mercado Pago -->
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 <div id="wallet_container" class="mt-6 flex justify-center"></div>
 
 <script>
+    // 🚨 CRÍTICO: Substitua "SUA_PUBLIC_KEY_AQUI" pela chave pública do Mercado Pago
     const mp = new MercadoPago("SUA_PUBLIC_KEY_AQUI", { locale: "pt-BR" });
     mp.bricks().create("wallet", "wallet_container", {
         initialization: {
-            preferenceId: "{{ preference_id }}",
+            // 🚨 CORREÇÃO 2: A view envia preference_id como variável de contexto
+            preferenceId: "{{ mp_preference_id }}", 
+        },
+        customization: {
+            texts: {
+                action: 'buy',
+                value_prop: 'security_details',
+            },
         },
     });
 </script>

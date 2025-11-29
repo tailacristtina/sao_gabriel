@@ -1,0 +1,13 @@
+{% include 'nav.html' %}
+{% block content %}
+
+<h2>✅ Pedido #{{ order.id_order }}</h2>
+
+<p>Obrigado pela compra, {{ request.session.user_name }}.</p>
+<p>O número do seu pedido é <strong>#{{ order.id_order }}</strong>.</p>
+<p>Status: {{ order.status }}</p>
+<p>Total: R$ {{ order.total|floatformat:2 }}</p>
+
+<a href="{% url 'product:listar_produtos' %}">Voltar à loja</a>
+
+{% endblock %}

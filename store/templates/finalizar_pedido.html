@@ -1,0 +1,86 @@
+{% load static %}
+{% include 'nav.html' %}
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="min-h-screen bg-[#f9f5f0] py-10 px-4">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+
+    <h2 class="text-3xl font-semibold text-center text-[#4b2e1e] mb-6">
+      ☕ Finalizar Pedido
+    </h2>
+
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#4b2e1e] mb-2">Endereço de entrega</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="cep" placeholder="CEP"
+                 class="border border-[#b89a7e] rounded-lg px-4 py-2" required>
+          <input type="text" name="endereco" placeholder="Endereço completo"
+                 class="border border-[#b89a7e] rounded-lg px-4 py-2" required>
+          <input type="text" name="cidade" placeholder="Cidade"
+                 class="border border-[#b89a7e] rounded-lg px-4 py-2" required>
+          <input type="text" name="estado" placeholder="Estado"
+                 class="border border-[#b89a7e] rounded-lg px-4 py-2" required>
+        </div>
+      </div>
+
+    <div>
+        <h3 class="text-lg font-semibold text-[#4b2e1e] mb-2">Resumo</h3>
+        
+        <div class="border border-[#e8dfd3] rounded-xl p-4 bg-[#f8f3ed]">
+            
+            {% comment %} 
+                ✅ MUDAR 'produtos' para 'itens_carrinho' 
+            {% endcomment %}
+            {% for item in itens_carrinho %}
+                
+                <div class="flex justify-between text-sm text-[#4b2e1e] mb-1">
+                    <span>{{ item.produto.name }} (x{{ item.quantidade }})</span> 
+                    <span>R$ {{ item.subtotal_item|floatformat:2 }}</span> 
+                </div>
+            {% endfor %}
+            
+            <hr class="my-2 border-[#b89a7e]">
+
+            {% comment %} 
+                ✅ MUDAR 'Total' para 'Subtotal' (primeira linha) e 'total_compra' (segunda linha)
+                Também adicionamos o Frete para clareza
+            {% endcomment %}
+            
+            <div class="flex justify-between text-sm text-[#4b2e1e] mb-1">
+                <span>Subtotal:</span>
+                <span>R$ {{ subtotal|floatformat:2 }}</span>
+            </div>
+            
+            <div class="flex justify-between text-sm text-[#4b2e1e] mb-1">
+                <span>Frete:</span>
+                <span>R$ {{ frete|floatformat:2 }}</span>
+            </div>
+
+            <hr class="my-2 border-[#b89a7e]">
+            
+            <div class="flex justify-between font-bold text-[#4b2e1e]">
+                <span>Total:</span>
+                
+                {% comment %} 
+                    ✅ MUDAR 'total' para 'total_compra' 
+                {% endcomment %}
+                <span>R$ {{ total_compra|floatformat:2 }}</span> 
+            </div>
+        </div>
+    </div>
+
+      <div class="flex justify-end">
+        <button type="submit"
+                class="bg-[#6f4e37] hover:bg-[#8b5e3c] text-white px-6 py-3 rounded-lg font-medium transition">
+          Finalizar Pedido
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+  {% include 'footer.html' %}

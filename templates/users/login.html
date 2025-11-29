@@ -111,7 +111,7 @@
     </div>
 {% endif %}
 
-        <form method="POST" action="{% url 'login' %}" class="space-y-6">
+        <form method="POST" action="{% url 'users:login' %}" class="space-y-6">
             {% csrf_token %}
                 <div class="space-y-4">
                     <div class="space-y-2">
@@ -203,7 +203,7 @@
 
             <p class="text-center text-sm text-[#6D4C41]">
                 Não tem uma conta? 
-                <a href="{% url 'register' %}" class="font-medium coffee-red hover:text-[#8B4513] transition-colors ml-1">
+                <a href="{% url 'users:register' %}" class="font-medium coffee-red hover:text-[#8B4513] transition-colors ml-1">
                     Criar conta
                 </a>
             </p>

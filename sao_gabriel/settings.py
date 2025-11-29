@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-6x)t22)01f#v8m^la2(l58xtx_af(dh^%%nok@#%!k!wcyad$%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '127.0.0.1:8000']
 
 
 # Application definition
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
      
     'users',
     'product',
-    'pagamento',
+    'payment',
     'app_admin',
     'store',
 ]
@@ -62,7 +62,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'pagamento': {
+        'payment': {
             'handlers': ['console'],
             'level': 'DEBUG',  # Define o nível para exibir todos os logs (incluindo ERROR)
             'propagate': True,
@@ -80,9 +80,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  
 )
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/index'  
-LOGOUT_REDIRECT_URL = '/login'  
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'store:index'
+LOGOUT_REDIRECT_URL = 'users:login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,6 +92,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'sao_gabriel.urls'
@@ -126,10 +127,10 @@ DATABASES = {
         'NAME': 'bd_coffee', 
         'USER': 'root', 
         'PASSWORD': '', 
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
-            
+        
         }
     }
 }
@@ -180,22 +181,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# sao_gabriel/settings.py (Adicione no final do arquivo)
-
-
-# -----------------------------------------------------
-
-
-
-
-# URL para redirecionar após o login bem-sucedido (sem parâmetros 'next')
-LOGIN_REDIRECT_URL = '/index' # Redireciona para a página inicial (listar_produtos)
-# ...
-
-# URL onde o Django deve buscar a página de login.
-# Já está implícito na sua view, mas é bom ter no settings também.
-LOGIN_URL = '/contas/login/' # Ou 'contas/login/' se você seguiu o passo 1
 
 # --- Configurações do Mercado Pago (Sandbox/Teste) ---
 MP_ACCESS_TOKEN = 'APP_USR-2201546978636815-111017-c7629d7e22017f3b3ad4ca670d35e378-2979950899'
